@@ -1,6 +1,6 @@
-use actix_web::{post, web};
-use serde::{Deserialize, Serialize};
 use crate::database::repository::user::UserRepository;
+use actix_web::{post, web, Responder};
+use serde::Deserialize;
 
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -10,10 +10,6 @@ struct CredentialLogin {
 }
 
 #[post("/auth/credential")]
-async fn credential_auth(user: web::Data<UserRepository>, form: CredentialLogin) -> impl Responder {
-    let find_user = user.by_username(form.username).await;
-
-
-
-    1
+async fn credential_auth(user: web::Data<UserRepository>, form: web::Json<CredentialLogin>) -> impl Responder {
+    "meow"
 }

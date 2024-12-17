@@ -19,13 +19,13 @@ pub async fn run() -> std::io::Result<()> {
         db: db.clone(),
     });
 
-    let user_repo = UserRepository::new(db.clone());
+    let user_repo = Data::new(UserRepository::new(std::sync::Arc::from(db.clone())));
 
     // TODO: SSL impl
     HttpServer::new(move || {
         App::new()
             .app_data(state.clone())
-            .app_data(Data::new(user_repo))
+            .app_data(user_repo.clone())
             // .service(hello)
             // .service(echo)
             // .route("/hey", web::get().to(manual_hello))
