@@ -1,7 +1,7 @@
 use super::Repository;
 use crate::repository_macro;
 
-use entity::invite;
+use crate::entity::invite;
 
 struct InviteRepository {
     db: DatabaseConnection

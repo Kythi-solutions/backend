@@ -1,17 +1,32 @@
+use crate::entity::prelude::User;
 use super::Repository;
 use crate::repository_macro;
 
-use entity::user;
+use crate::entity::user;
 
+use sea_orm::{ColumnTrait, QueryFilter};
+use syn::token::Use;
 
-struct UserRepository {
+pub struct UserRepository {
     db: DatabaseConnection
 }
 
+repository_macro!(user, UserRepository, i32);
+
 impl UserRepository {
-    fn new(db: DatabaseConnection) -> UserRepository {
+    pub fn new(db: DatabaseConnection) -> UserRepository {
         UserRepository { db }
+    }
+
+    pub async fn by_username(&self, username: String) ->  Result<Option<user::Model>, sea_orm::DbErr> {
+        User::find().filter(user::Column::Username.eq(username)).one(&self.db).await
     }
 }
 
-repository_macro!(user, UserRepository, i32);
+impl Copy for UserRepository { }
+
+impl Clone for UserRepository {
+    fn clone(&self) -> UserRepository {
+        *self
+    }
+}
