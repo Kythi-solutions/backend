@@ -1,8 +1,8 @@
-use std::convert::Into;
 use std::sync::Arc;
+use sea_orm::{ColumnTrait, QueryFilter};
+
 use super::Repository;
 use crate::repository;
-
 use crate::entity::user;
 
 pub struct UserRepository {

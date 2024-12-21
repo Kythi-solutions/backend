@@ -5,18 +5,32 @@ edition = "2024"
 authors = ["E"]
 
 [dependencies]
+# core
 actix-web = "4.9.0"
+actix-session = { version = "0.10.1", features = ["redis-session", "redis-session-rustls"] }
+sea-orm = { version = "1.1.0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "with-json", "with-uuid" ] }
+redis = "0.27.6"
 dotenvy = "0.15.7"
-sea-orm = { version = "1.1.0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "with-json", "with-uuid" ] }#
+futures-util = "0.3.31"
+derive_more = "1.0.0"
 
+# auth 
+jwt = "0.16.0"
+
+# json
 serde_json = "1.0.133"
 serde = { version = "1.0.216", features = ["derive"] }
 
+# error handling
+anyhow = { version = "1.0", default-features = true }
+
+# external crate for db
 database = { path = "../database" }
 
-# metrics
-opentelemetry-otlp = "0.27.0"
-opentelemetry = "0.27.0"
-opentelemetry_sdk = "0.27.0"
-opentelemetry-stdout = { version = "0.27.0", features = ["trace", "metrics"] }
-actix-web-opentelemetry = { version = "0.19.0", features = ["metrics-prometheus", "sync-middleware", "awc"] }
+
+# metrics (for later use)
+# opentelemetry-otlp = "0.27.0"
+# opentelemetry = "0.27.0"
+# opentelemetry_sdk = "0.27.0"
+# opentelemetry-stdout = { version = "0.27.0", features = ["trace", "metrics"] }
+# actix-web-opentelemetry = { version = "0.19.0", features = ["metrics-prometheus", "sync-middleware", "awc"] }

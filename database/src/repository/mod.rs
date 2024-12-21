@@ -1,6 +1,5 @@
 use sea_orm::prelude::async_trait::async_trait;
-use sea_orm::sea_query::IntoValueTuple;
-use sea_orm::{ActiveModelBehavior, ActiveModelTrait, ColumnTrait, DatabaseConnection, DbErr, DeleteResult, EntityTrait, FromQueryResult, InsertResult, IntoActiveModel, Iterable, ModelTrait, PrimaryKeyToColumn, PrimaryKeyTrait, QueryFilter};
+use sea_orm::{ActiveModelBehavior, ActiveModelTrait, DatabaseConnection, DbErr, EntityTrait, FromQueryResult, IntoActiveModel, ModelTrait, PrimaryKeyTrait};
 
 pub mod user;
 
@@ -25,8 +24,7 @@ pub trait Repository<
 #[macro_export]
 macro_rules! repository {
     ($repo: ty, $e:ty, $m:ty, $a: ty) => {
-        use sea_orm::{ActiveModelTrait, DatabaseConnection, DeleteResult, EntityTrait, InsertResult, ModelTrait, PrimaryKeyTrait, QueryFilter, ColumnTrait, ColumnDef, PrimaryKeyToColumn, DbErr, DeleteMany, Iterable, UpdateResult};
-        use sea_orm::prelude::async_trait::async_trait;
+        use sea_orm::{DatabaseConnection, EntityTrait};
         impl Repository<$e, $m, $a> for $repo {
              fn get_db(&self) -> std::sync::Arc<DatabaseConnection> {
                 self.db.clone()

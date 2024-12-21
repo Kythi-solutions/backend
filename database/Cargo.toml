@@ -5,11 +5,12 @@ edition = "2024"
 publish = false
 
 [dependencies]
-sea-orm = { version = "1.1.0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "with-json", "with-uuid" ] }# build libpq and openssl as part of the build process
-# uncomment these lines if you run into setup issues
-# pq-sys = { version = "0.6", features = ["bundled"] }
-# openssl-sys = { version = "0.9.100", features = ["vendored"] } 
+actix-session = { version = "0.10.1", features = ["redis-session", "redis-session-rustls"] }
+sea-orm = { version = "1.1.0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "with-json", "with-uuid" ] }
+redis = "0.27.6"# uncomment these lines if you run into setup issues
 dotenvy = "0.15"
+
+anyhow = { version = "1.0", default-features = true }
 chrono = "0.4.39"
 sonyflake = "0.3"
 syn = "2.0.90"
